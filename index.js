@@ -9,7 +9,7 @@ const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const bodyParser = require('body-parser');
-app.use(cors("https://big-4bxu.onrender.com/create"))
+app.use(cors("https://big-4bxu.onrender.com/"))
 app.use(express.json())
 app.use(bodyParser.json());
 app.use("/images", express.static(path.join(__dirname, "public/Images")));
