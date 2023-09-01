@@ -12,9 +12,10 @@ const AchieveSchema = new mongoose.Schema(
     },
     country:{type:String},
     state:{type:String},
+    village:{type:String},sub_village:{type:String},category:{type:String},
     district:{type:String},
     mandal:{type:String}, town:{type:String},
-    catagory: { type: String, default: "nocatagory" },
+   
     rating: { type: Number, default: 0 },
     img: {
       type: String,
