@@ -216,7 +216,7 @@ app.post('/', async (req, res) => {
     //     res.status(201).json({ status: "fail" });
     //   }
   })
-
+  io.listen(5000);
 app.listen(3001, () => {
   console.log("Server is running")
 })
