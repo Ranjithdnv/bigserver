@@ -1,5 +1,11 @@
 const express = require('express')
-const { Server } = require( "socket.io")
+// const { Server } = require( "socket.io")
+const io = require("socket.io")(8900, {
+  cors: {
+    origin: "http://localhost:3000",
+  },
+});
+
 const app = express()
 const mongoose = require("mongoose");
 const cors = require('cors')
@@ -47,11 +53,11 @@ res.send(req.file.filename)
 })
 
 
-const io = new Server({
-  cors: {
-    origin: "https://soclienttest.onrender.com/",
-  },
-});
+// const io = new Server({
+//   cors: {
+//     origin: "https://soclienttest.onrender.com/",
+//   },
+// });
 let onlineUsers = [];
 
 const addNewUser = (username, socketId) => {
@@ -216,7 +222,7 @@ app.post('/', async (req, res) => {
     //     res.status(201).json({ status: "fail" });
     //   }
   })
-  io.listen(5000);
+  // io.listen(5000);
 app.listen(3001, () => {
   console.log("Server is running")
 })
