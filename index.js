@@ -1,4 +1,5 @@
 const express = require('express')
+const { Server } = require( "socket.io")
 const app = express()
 const mongoose = require("mongoose");
 const cors = require('cors')
@@ -14,7 +15,7 @@ const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const bodyParser = require('body-parser');
-app.use(cors("https://future-together.onrender.com/"))  //  https://big-4bxu.onrender.com/
+app.use(cors("https://future-together.onrender.com/"))  //  https://big-4bxu.onrender.com/ // https://future-together.onrender.com/
 app.use(express.json())
 app.use(bodyParser.json());
 app.use("/images", express.static(path.join(__dirname, "public/Images")));
@@ -44,6 +45,57 @@ app.post('/upload', upload.single('file'), (req, res) => {
   console.log(req.file)
 res.send(req.file.filename)
 })
+
+
+const io = new Server({
+  cors: {
+    origin: "https://soclienttest.onrender.com/",
+  },
+});
+let onlineUsers = [];
+
+const addNewUser = (username, socketId) => {
+  !onlineUsers.some((user) => user.username === username) &&
+    onlineUsers.push({ username, socketId });
+};
+const getUser = (username) => {
+  return onlineUsers.find((user) => user.username === username);
+};
+const removeUser = (socketId) => {
+  onlineUsers = onlineUsers.filter((user) => user.socketId !== socketId);
+};
+
+io.on("connection", (socket) => {
+  socket.on("newUser", (username) => {
+    addNewUser(username, socket.id);
+
+
+
+    console.log(onlineUsers)
+  })
+  socket.on("sendText", ({ senderName, receiverName, text }) => {
+    const receiver = getUser(receiverName);
+    console.log(receiver)
+    console.log(senderName)
+    console.log(receiverName)
+    console.log(text)
+
+
+    io.to(receiver?.socketId).emit("getText", {
+      senderName,
+      text,
+    });
+  });
+ 
+  socket.on("disconnect", () => {
+    removeUser(socket.id);
+    console.log(onlineUsers)
+   
+  });
+
+});
+
+
 const protect =async (req, res, next) => {
   //  Getting token and check of it's there
   let token;
