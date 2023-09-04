@@ -171,12 +171,31 @@ app.post("/postmessage", async (req, res) => {
 });
 //
 app.get("/postmessagesearch/:_id", async (req, res) => {
-  console.log(req.params.id);
+  console.log(req.params._id);
   const post = await Post.findById(req.params._id);
+  console.log(123);
+  res.status(201).json({ status: "success", post });
+});
+//
+app.put("/postmessagesearch/:_id/like", async (req, res) => {
+  console.log(req.body);
+  const post = await Post.findById(req.params._id);
+  console.log(post);
+  await post?.updateOne({ $push: { messages: req.body } });
+  res.status(200).send(post);
+});
+//
+app.delete("/", async (req, res) => {
+  const post = await Post.deleteMany();
 
   res.status(201).json({ status: "success", post });
 });
+//
+app.delete("/achieve", async (req, res) => {
+  const post = await Achieve.deleteMany();
 
+  res.status(201).json({ status: "success", post });
+});
 //
 app.listen(3001, () => {
   console.log("Server is running");
