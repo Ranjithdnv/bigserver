@@ -179,9 +179,13 @@ app.get("/postmessagesearch/:_id", async (req, res) => {
 //
 app.put("/postmessagesearch/:_id/like", async (req, res) => {
   console.log(req.body);
-  const post = await Post.findById(req.params._id);
+  const post = await Post.findByIdAndUpdate(
+    req.params._id,
+    { $push: { messages: req.body } },
+    { new: true }
+  );
   console.log(post);
-  await post?.updateOne({ $push: { messages: req.body } });
+  // await post?.updateOne({ $push: { messages: req.body } }, { new: true });
   res.status(200).send(post);
 });
 //
