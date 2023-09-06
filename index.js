@@ -15,8 +15,8 @@ const User = require("./models/user");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const bodyParser = require("body-parser");
-app.use(cors()); //  https://big-4bxu.onrender.com/ // https://future-together.onrender.com/
+const bodyParser = require("body-parser"); //  https://big-4bxu.onrender.com/ // https://future-together.onrender.com/
+app.use(cors("https://future-together.onrender.com"));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use("/images", express.static(path.join(__dirname, "public/Images")));
