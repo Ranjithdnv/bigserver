@@ -32,8 +32,8 @@ mongoose
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("success"));
-app.use(helmet());
-app.use(morgan("common"));
+// app.use(helmet());
+// app.use(morgan("common"));
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     return cb(null, "./public/Images");
