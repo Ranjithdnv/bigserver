@@ -17,7 +17,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const bodyParser = require("body-parser"); //  https://big-4bxu.onrender.com/ // https://future-together.onrender.com/
 app.use(
-  cors("https://future-together.onrender.com/")
+  cors("https://big-4bxu.onrender.com/")
   // "https://future-together.onrender.com"
 );
 app.use(express.json());
