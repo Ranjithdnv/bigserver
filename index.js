@@ -113,7 +113,7 @@ app.get("/", protect, async (req, res) => {
 app.post("/filter", async (req, res) => {
   console.log(req.body);
   const newPost = await Achieve.find({
-    country: "india",
+    country: req.body.country,
     category: req.body.category,
   });
   try {
