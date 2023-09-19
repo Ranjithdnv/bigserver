@@ -22,13 +22,14 @@ app.use(
 );
 app.use(express.json());
 
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-    parameterLimit: 100000,
-    limit: "500mb",
-  })
-);
+// app.use(
+//   bodyParser.urlencoded({
+//     extended: true,
+//     parameterLimit: 100000,
+//     limit: "500mb",
+//   })
+// );
+app.use(express.bodyParser({ limit: "50mb" }));
 app.use(bodyParser.json());
 app.use("/images", express.static(path.join(__dirname, "public/Images")));
 dotenv.config({ path: "./config.env" });
