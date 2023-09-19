@@ -19,6 +19,7 @@ const AchieveSchema = new mongoose.Schema(
       max: 500,
     },
     insta: { type: String },
+    imgss: { type: String },
     youtube: { type: String },
     other: { type: String },
     country: { type: String },
