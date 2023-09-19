@@ -18,6 +18,7 @@ const AchieveSchema = new mongoose.Schema(
       type: String,
       max: 500,
     },
+    insta: { type: String },
     country: { type: String },
     state: { type: String },
     village: { type: String },
