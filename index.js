@@ -21,8 +21,15 @@ app.use(
   // "https://future-together.onrender.com"
 );
 app.use(express.json());
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+    parameterLimit: 100000,
+    limit: "500mb",
+  })
+);
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true, parameterLimit: 100000 }));
 app.use("/images", express.static(path.join(__dirname, "public/Images")));
 dotenv.config({ path: "./config.env" });
 db = process.env.DATABASE_URL;
