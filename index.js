@@ -125,6 +125,7 @@ app.post("/filter", async (req, res) => {
   const newPost = await Achieve.find({
     country: req.body.country,
     category: req.body.category,
+    sub_category: req.body.sub_category || "",
   });
   try {
     // console.log(req.body)
