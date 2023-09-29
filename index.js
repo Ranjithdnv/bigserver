@@ -13,15 +13,25 @@ const Achieve = require("./models/achieve");
 const Post = require("./models/post");
 const User = require("./models/user");
 const dotenv = require("dotenv");
-const helmet = require("helmet");
-const morgan = require("morgan");
-const bodyParser = require("body-parser"); //  https://big-4bxu.onrender.com/ // https://future-together.onrender.com/
-app.use(
-  cors("https://big-4bxu.onrender.com/")
-  // "https://future-together.onrender.com"
-);
+// const helmet = require("helmet");
+// const morgan = require("morgan");
+const bodyParser = require("body-parser");
+var jsonParser = bodyParser.json({
+  limit: 1024 * 1024 * 10,
+  type: "application/json",
+});
+var urlencodedParser = bodyParser.urlencoded({
+  extended: true,
+  limit: 1024 * 1024 * 10,
+  type: "application/x-www-form-urlencoded",
+});
+app.use(jsonParser);
+app.use(urlencodedParser);
+//  https://big-4bxu.onrender.com/ // https://future-together.onrender.com/
+app.use(cors("https://big-4bxu.onrender.com"));
+
 app.use(express.json());
-app.use(bodyParser.json());
+
 app.use("/images", express.static(path.join(__dirname, "public/Images")));
 dotenv.config({ path: "./config.env" });
 db = process.env.DATABASE_URL;
