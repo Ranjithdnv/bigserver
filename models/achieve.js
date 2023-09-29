@@ -26,7 +26,7 @@ const AchieveSchema = new mongoose.Schema(
     district: { type: String },
     mandal: { type: String },
     town: { type: String },
-
+    sub_category: { type: String },
     rating: { type: Number, default: 0 },
     img: {
       type: String,
